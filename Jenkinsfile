@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     environment {
-        EMAIL_RECIPIENTS = 'yashpindersaini@gmail.com'  
+        EMAIL_RECIPIENTS = 'yashpindersaini@gmail.com'
     }
 
     stages {
         stage('Build') {
             steps {
                 echo 'Stage 1: Build - This stage compiles the code and packages it into an executable format.'
-                
             }
         }
 
@@ -65,6 +64,27 @@ pipeline {
     }
 
     post {
+        always {
+            script {
+                def buildStatus = currentBuild.currentResult
+                def buildUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')[0]?.userId ?: 'GitHub User'
+
+                emailext(
+                    subject: "Pipeline ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """
+                        <p>This is a Jenkins BINGO CICD pipeline status.</p>
+                        <p>Project: ${env.JOB_NAME}</p>
+                        <p>Build Number: ${env.BUILD_NUMBER}</p>
+                        <p>Build Status: ${buildStatus}</p>
+                        <p>Started by: ${buildUser}</p>
+                        <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    """,
+                    to: "${EMAIL_RECIPIENTS}",
+                    from: 'yashpindersaini@gmail.com',
+                    replyTo: 'yashpindersaini@gmail.com'
+                )
+            }
+        }
         failure {
             echo 'Pipeline failed. Sending notification email...'
         }
