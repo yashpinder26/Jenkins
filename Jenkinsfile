@@ -9,7 +9,6 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Stage 1: Build - This stage compiles the code and packages it into an executable format.'
-                echo 'Stage 1: Build - This stage compiles the code and packages it into an executable format.'
                 
             }
         }
