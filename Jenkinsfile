@@ -72,7 +72,7 @@ pipeline {
                 emailext(
                     subject: "Pipeline ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                     body: """
-                        <p>This is a Jenkins BINGO CICD pipeline status.</p>
+                        <p>This is a Jenkins pipeline status.</p>
                         <p>Project: ${env.JOB_NAME}</p>
                         <p>Build Number: ${env.BUILD_NUMBER}</p>
                         <p>Build Status: ${buildStatus}</p>
