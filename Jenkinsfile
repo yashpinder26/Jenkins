@@ -11,7 +11,7 @@ pipeline {
                 echo 'Stage 1: Build - This stage compiles and packages the application using a build automation tool.'
                 echo 'For Java projects, Maven (mvn clean package) or Gradle can be used.'
                 echo 'For JavaScript projects, npm (npm run build) or yarn (yarn build) can handle the build process.'
-                echo 'For Python projects, setuptools or PyInstaller can package the application.'
+                echo 'For Python projects, setuptools or PyInstaller can package the application..'
             }
         }
 
